@@ -1,46 +1,105 @@
-# MLSC — Campus Expense Splitter
+# 🚀 Campus Expense Spliter
 
-This repository contains the Campus Expense Splitter application (smart contracts and frontend) used to demo splitting expenses using Algorand.
+## 📌 Overview
+Campus Expense Spliter is a decentralized application built on the Algorand blockchain that enables students to securely split expenses and settle payments in a transparent and trustless manner.
 
-Contents:
+---
 
-- `campus-expense-splitter/` — application source, contracts, frontend, and docs.
+## ❗ Problem Statement
+College students frequently split expenses for food, travel, projects, and events.  
+Existing solutions:
+- Are centralized
+- Charge transaction fees
+- Lack transparency
+- Depend on third-party trust
+- Cause payment disputes
 
-See the full project README inside the project folder:
+This project provides a blockchain-based alternative to solve these issues.
 
- - Campus app README: campus-expense-splitter/README.md
+---
 
-How to run (quick):
+## 💡 Solution
+Our platform:
+- Enables peer-to-peer payments using blockchain wallets
+- Records expenses immutably on-chain
+- Automates expense splitting using smart contracts
+- Ensures low-cost and fast settlements
 
-# MLSC
+---
 
-A curated workspace containing the Campus Expense Splitter project — an Algorand-based app that helps groups split and settle expenses.
+## 🔗 Why Algorand?
+We chose Algorand because it provides:
+- ⚡ Fast transaction finality
+- 💸 Low transaction fees
+- 🔐 Secure & decentralized network
+- 📜 Smart contract support (PyTeal)
+- 📊 Immutable on-chain records
 
-Quick links
-- Project: [campus-expense-splitter](campus-expense-splitter/README.md)
+---
 
-Highlights
-- Smart contracts written in PyTeal and compiled to TEAL (see [campus-expense-splitter/contracts/expense_app.py](campus-expense-splitter/contracts/expense_app.py#L1)).
-- React frontend with wallet integration and live UI ([campus-expense-splitter/frontend/src/App.jsx](campus-expense-splitter/frontend/src/App.jsx#L1)).
+## 🏗️ System Architecture
+### 1️⃣ Frontend
+- React.js UI
+- Wallet connection
+- Expense management interface
 
-For judges / reviewers
-- Start with the project README: [campus-expense-splitter/README.md](campus-expense-splitter/README.md).
-- Key files to inspect:
-	- [campus-expense-splitter/contracts/expense_app.py](campus-expense-splitter/contracts/expense_app.py#L1) — smart contract logic
-	- [campus-expense-splitter/scripts/deploy_contract.py](campus-expense-splitter/scripts/deploy_contract.py#L1) — deployment helper
-	- [campus-expense-splitter/frontend/src/algorand/client.js](campus-expense-splitter/frontend/src/algorand/client.js#L1) — blockchain client integration
+### 2️⃣ Smart Contracts
+- Written in PyTeal
+- Compiled to TEAL
+- Handles splitting & settlement logic
 
-Run quick demo (local)
-```powershell
-cd campus-expense-splitter
+### 3️⃣ Blockchain
+- Algorand Testnet
+- Stores transaction records
+
+---
+
+## 🛠 Tech Stack
+
+### 🔗 Blockchain
+- Algorand Testnet
+- PyTeal
+
+### 💻 Frontend
+- React.js
+- HTML, CSS, JavaScript
+
+### 🔐 Wallet
+- Pera Wallet
+
+### ⚙️ Tools
+- Python
+- VS Code
+- Git & GitHub
+
+---
+
+---
+
+## ✅ Features Implemented
+- Wallet connection
+- Expense creation
+- Equal split logic
+- Settlement transactions
+- On-chain recording
+
+---
+
+## ⏳ Future Scope
+- Unequal expense splitting
+- Analytics dashboard
+- Event ticketing integration
+- Mobile application
+- Multi-campus expansion
+
+---
+
+## 🧪 How to Run Locally
+
+### Backend Setup
+```bash
 python -m venv .venv
-. .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-cd frontend
-npm install
-npm start
-```
-
-If you want me to open a PR with these docs and push the branch, tell me and I'll push changes to a repo branch and open a PR for review.
 
 
+## 📂 Project Structure
