@@ -145,152 +145,66 @@ Creates a new expense group
 - **Cost**: 0.001 ALGO (transaction fee)
 
 ### `add_expense`
-Records a new expense
-- **Args**: Description, amount, paid by, split between
-- **Cost**: 0.001 ALGO (transaction fee)
+# 🏫 Campus Expense Splitter
 
-### `settle_up`
-Records a settlement payment
-- **Args**: Creditor address
-- **Cost**: Varies based on payment amount + 0.001 ALGO fee
+An Algorand-based group expense manager built for quick demos and hackathons. This repository contains the smart contract (PyTeal), deployment scripts, and a React frontend wired to Algorand wallets for a non-custodial experience.
 
-## 📊 Example Workflow
+Why this project
+- Demonstrates end-to-end dApp flow: smart contract → deployment → frontend wallet interactions.
+- Clean UX for groups to add expenses and settle on-chain.
 
+Implemented (what to look for)
+- ✅ Wallet integration (PeraWallet / MyAlgoConnect)
+- ✅ Create groups and store members in app state
+- ✅ Add expenses and split logic
+- ✅ Settlement calculations and transaction flow
+- ✅ PyTeal contract compiled to TEAL (compiled files in `contracts/build/`)
+
+Remaining / Nice-to-have
+- ⚪ Gas/fee pooling for cheaper multi-payments
+- ⚪ UI polish and accessibility improvements
+- ⚪ End-to-end automated tests for contract + frontend
+
+Important files (for reviewers)
+- `contracts/expense_app.py` — core PyTeal contract logic ([open](campus-expense-splitter/contracts/expense_app.py#L1))
+- `contracts/compile.py` — compile helper to generate TEAL
+- `scripts/deploy_contract.py` — deploys the contract to Algorand
+- `frontend/src/algorand/client.js` — Algorand client and provider wiring
+- `frontend/src/components` — key UI pieces: `CreateGroup`, `AddExpense`, `SettleUp`
+
+Quick demo (local)
+1. Create Python venv and install dependencies
+```powershell
+cd campus-expense-splitter
+python -m venv .venv
+. .venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 ```
-User A, B, C create group "Dinner"
-│
-├─ User A adds: "Pizza" - 30 ALGO (split equally)
-│  → Each pays 10 ALGO
-│
-├─ User B adds: "Drinks" - 15 ALGO (A, B only)
-│  → Each pays 7.5 ALGO
-│
-└─ Settlement:
-   → A owes B: 7.5 ALGO
-   → C pays A: 10 ALGO
-```
-
-## 🔐 Security Considerations
-
-- ✅ **Non-custodial**: Private keys never leave your wallet
-- ✅ **Blockchain verified**: All transactions on Algorand chain
-- ✅ **Group permissions**: Only members can view/modify expenses
-- ✅ **Immutable records**: Transactions cannot be altered
-
-## 🛠️ Development
-
-### Build for Production
-
-```bash
+2. Install and start frontend
+```powershell
 cd frontend
-npm run build
+npm install
+npm start
 ```
-
-### Run Tests
-
-```bash
-cd frontend
-npm test
-```
-
-### Contract Development
-
-Edit `contracts/expense_app.py` and recompile:
-```bash
-cd contracts
+3. Compile & deploy contract (optional — for running full flow)
+```powershell
+cd ../contracts
 python compile.py
 python ../scripts/deploy_contract.py
 ```
 
-## 📝 API Reference
+Notes for judges
+- Use a Testnet account (faucet) and PeraWallet or MyAlgoConnect to interact with the UI.
+- If you're short on time, you can still review contract logic in `contracts/expense_app.py` and run the frontend in mock mode by configuring `frontend/.env`.
 
-### ConnectWallet Component
-```jsx
-<ConnectWallet onWalletConnected={(address) => {}} />
-```
+How to run tests (if available)
+- Frontend: `cd frontend && npm test`
+- Contract unit tests: none currently; recommend manual review of `contracts/expense_app.py`.
 
-### CreateGroup Component
-```jsx
-<CreateGroup 
-  userAddress="ALGO_ADDRESS"
-  onGroupCreated={(group) => {}} 
-/>
-```
+Contributing
+- Fork → branch → PR. See root README for quick links.
 
-### AddExpense Component
-```jsx
-<AddExpense 
-  userAddress="ALGO_ADDRESS"
-  onExpenseAdded={(expense) => {}} 
-/>
-```
+License
+- MIT
 
-### SettleUp Component
-```jsx
-<SettleUp 
-  userAddress="ALGO_ADDRESS"
-  expenses={[]} 
-/>
-```
-
-## 🐛 Troubleshooting
-
-### Wallet Won't Connect
-- ✅ Ensure browser extension is installed
-- ✅ Check if you're on testnet
-- ✅ Clear browser cache and reload
-
-### Insufficient Funds
-- ✅ Transfer test ALGO from faucet: [testnet-dispenser.rand-labs.io](https://testnet-dispenser.rand-labs.io)
-- ✅ Each transaction costs ~0.001 ALGO
-
-### App Not Displaying
-- ✅ Check browser console for errors
-- ✅ Verify `.env` configuration
-- ✅ Ensure smart contract is deployed
-
-### Contract Compilation Error
-- ✅ Update PyTeal: `pip install --upgrade pyteal`
-- ✅ Check Python version (3.8+)
-- ✅ Review error message for syntax issues
-
-## 📚 Resources
-
-- **Algorand Docs**: [developer.algorand.org](https://developer.algorand.org)
-- **PyTeal Docs**: [pyteal.readthedocs.io](https://pyteal.readthedocs.io)
-- **React Docs**: [react.dev](https://react.dev)
-- **Algorand SDK**: [github.com/algorand/py-algorand-sdk](https://github.com/algorand/py-algorand-sdk)
-
-## 🤝 Contributing
-
-Contributions welcome! Please:
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open Pull Request
-
-## 📄 License
-
-This project is licensed under the **MIT License** - see LICENSE file for details.
-
-## ✨ Built With
-
-- **React 18** - UI framework
-- **PyTeal** - Smart contract language
-- **Algorand SDK** - Blockchain interaction
-- **Algorand** - Layer 1 blockchain
-- **CSS3** - Styling
-
-## 🎓 Hackathon Note
-
-This application was developed for educational and hackathon purposes. It demonstrates:
-- ✅ Smart contract development with PyTeal
-- ✅ Blockchain integration with React
-- ✅ Financial calculations and settlements
-- ✅ User-friendly DeFi interface
-- ✅ Production-ready code patterns
-
----
-
-**Made with 💚 for the Algorand Community**
+Thank you — if you'd like, I can push these doc updates to a branch and open a PR for review.
