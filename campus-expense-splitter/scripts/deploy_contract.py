@@ -35,7 +35,10 @@ class ContractDeployer:
     
     def read_contract(self, filename):
         """Read compiled contract from file"""
-        with open(filename, "r") as f:
+        # Resolve path relative to this script for robustness
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        path = os.path.join(base_dir, "contracts", "build", os.path.basename(filename))
+        with open(path, "r") as f:
             return f.read()
     
     def compile_teal(self, teal_code):
@@ -63,14 +66,12 @@ class ContractDeployer:
             print("📝 Creating application...")
             txn = ApplicationCreateTxn(
                 sender=self.creator_address,
-                index=0,
+                sp=params,
+                on_complete=OnComplete.NoOpOC,
                 approval_program=approval_program,
                 clear_program=clear_program,
                 global_schema=StateSchema(num_uints=2, num_byte_slices=0),
                 local_schema=StateSchema(num_uints=0, num_byte_slices=0),
-                foreign_assets=[],
-                foreign_accounts=[],
-                sp=params
             )
             
             # Sign transaction

@@ -1,0 +1,39 @@
+name: AlgoKit Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  compile-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Python dependencies
+        run: |
+          python -m venv .venv
+          . .venv/bin/activate
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Compile contract
+        run: |
+          . .venv/bin/activate
+          python contracts/compile.py
+
+      - name: Deploy contract
+        env:
+          ALGOD_ADDRESS: ${{ secrets.ALGOD_ADDRESS }}
+          ALGOD_TOKEN: ${{ secrets.ALGOD_TOKEN }}
+          CREATOR_MNEMONIC: ${{ secrets.CREATOR_MNEMONIC }}
+        run: |
+          . .venv/bin/activate
+          python scripts/deploy_contract.py
