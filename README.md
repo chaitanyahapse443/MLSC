@@ -41,6 +41,5 @@ npm install
 npm start
 ```
 
-If you want me to open a PR with these docs and push the branch, tell me and I'll push changes to a repo branch and open a PR for review.
 
 
