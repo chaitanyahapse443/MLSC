@@ -22,4 +22,4 @@ npm install
 npm start
 ```
 
-If you want me to add a more detailed top-level README (badges, license, CI), tell me what to include.
+
