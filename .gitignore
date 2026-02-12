@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+env/
+venv/
+.venv/
+build/
+dist/
+*.egg-info/
+
+# Node
+node_modules/
+**/node_modules/
+frontend/node_modules/
+
+# Virtualenvs
+**/.venv/
+
+# Env files
+.env
+.env.*
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+*.manifest
+*.spec
+
+# VSCode
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Contracts/build
+campus-expense-splitter/contracts/build/
